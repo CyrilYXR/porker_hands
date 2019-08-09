@@ -18,4 +18,15 @@ public class PokerHandsTest {
         Assert.assertEquals("first", result);
 
     }
+
+    @Test
+    public void should_return_equal_when_equal_card_case(){
+
+        List<Poker> first = Arrays.asList(new Poker("4C"),new Poker("2D"),new Poker("3H"),new Poker("JS"),new Poker("AC"));
+        List<Poker> second = Arrays.asList(new Poker("4H"),new Poker("2C"),new Poker("3D"),new Poker("JC"),new Poker("AD"));
+
+        String result = PokerHands.compete(first, second);
+        Assert.assertEquals("equal", result);
+
+    }
 }
