@@ -30,7 +30,7 @@ public class PokerGame {
         Map<Integer, Integer> numberMap2 = pokerHands2.getNumberMap();
 
         if(level1 == level2){
-            if(level1 == 0) {
+            if(level1 == 0 || level1 == 4) {
                 return maxPokerNumber1 > maxPokerNumber2 ? FIRST : SECOND;
             }
 

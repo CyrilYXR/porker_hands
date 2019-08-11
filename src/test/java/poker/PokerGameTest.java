@@ -95,4 +95,16 @@ public class PokerGameTest {
         Assert.assertEquals("first", result);
 
     }
+
+
+    @Test
+    public void should_return_second_win_when_both_has_a_straight_but_second_is_bigger(){
+
+        List<Poker> first = Arrays.asList(new Poker("2C"),new Poker("3D"),new Poker("4H"),new Poker("5S"),new Poker("6C"));
+        List<Poker> second = Arrays.asList(new Poker("7C"),new Poker("8D"),new Poker("9H"),new Poker("TS"),new Poker("JC"));
+
+        String result = PokerGame.compete(first, second);
+        Assert.assertEquals("second", result);
+
+    }
 }
