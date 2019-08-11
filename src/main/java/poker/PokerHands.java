@@ -11,16 +11,20 @@ public class PokerHands {
     private List<Poker> pokers;
     private int level = 0;
 
+    private Map<Integer, Integer> map = new HashMap<>();
+
     public PokerHands(List<Poker> pokers) {
         this.pokers = pokers;
     }
 
     public int getMaxPokerNumber(){
-        return pokers.stream().mapToInt(Poker::getNumber).max().getAsInt();
+        return pokers.stream().filter(poker -> map.get(poker.getNumber())==1)
+                .mapToInt(Poker::getNumber)
+                .max().getAsInt();
     }
 
     public int getLevel() {
-        Map<Integer, Integer> map = new HashMap<>();
+//        Map<Integer, Integer> map = new HashMap<>();
         for(Poker poker : pokers){
             map.merge(poker.getNumber(), 1, (a, b) -> a + b);
         }
