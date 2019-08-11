@@ -34,6 +34,9 @@ public class PokerHands {
         if(numberMap.size() == 4){
             level = 1;
         }
+        if(numberMap.size() == 3){
+            level = 2;
+        }
         return level;
     }
 

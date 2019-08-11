@@ -62,4 +62,15 @@ public class PokerGameTest {
         Assert.assertEquals("second", result);
 
     }
+
+    @Test
+    public void should_return_first_win_when_first_has_two_pairs(){
+
+        List<Poker> first = Arrays.asList(new Poker("3C"),new Poker("3D"),new Poker("5H"),new Poker("5S"),new Poker("AC"));
+        List<Poker> second = Arrays.asList(new Poker("4C"),new Poker("4D"), new Poker("6D"), new Poker("KS"), new Poker("8C"));
+
+        String result = PokerGame.compete(first, second);
+        Assert.assertEquals("first", result);
+
+    }
 }
