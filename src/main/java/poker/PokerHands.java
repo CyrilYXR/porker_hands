@@ -50,9 +50,9 @@ public class PokerHands {
             level = 1;
         }
         if(numberMap.size() == 3){
-            if(valueList.get(0) == 2){  // two pairs
+            if(valueList.get(0) == 2){  // 最多重复次数是2, two pairs
                 level = 2;
-            } else {  //three of a kind
+            } else {  //最多重复次数是3, three of a kind
                 level = 3;
             }
         }
@@ -66,8 +66,12 @@ public class PokerHands {
         if(pokers.stream().map(Poker::getType).collect(Collectors.toSet()).size() == 1){
             level = 5;    //flush
         }
-        if(numberMap.size() == 2) {   // full house
-            level = 6;
+        if(numberMap.size() == 2) {
+            if(valueList.get(0) == 3) {  //最多重复次数是3且另外两张是pair, full house
+                level = 6;
+            } else {
+                level = 7;  //最多重复次数是4, four of a kind
+            }
         }
         return level;
     }
