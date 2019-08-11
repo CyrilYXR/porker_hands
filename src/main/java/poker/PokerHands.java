@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 public class PokerHands {
 
     private List<Poker> pokers;
-    private int level = 0;
+    private int level = LevelEnum.HIGH_CARD.getLevel();
 
     private Map<Integer, Integer> numberMap = new HashMap<>();
 
@@ -27,7 +27,7 @@ public class PokerHands {
         // 应该返回出现次数最多的数字，以便比较两者都是full house的情况
         if(filterPokers.size() == 0) {
             Integer max = numberMap.keySet().stream().mapToInt(numberMap::get).max().getAsInt();
-            System.out.println(max);
+//            System.out.println(max);
             filterPokers = pokers.stream().filter(poker -> numberMap.get(poker.getNumber()).equals(max)).collect(Collectors.toList());
         }
         return filterPokers.stream()
@@ -47,36 +47,36 @@ public class PokerHands {
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
         if(numberMap.size() == 4){  // one pair
-            level = 1;
+            level = LevelEnum.PAIR.getLevel();
         }
         if(numberMap.size() == 3){
             if(valueList.get(0) == 2){  // 最多重复次数是2, two pairs
-                level = 2;
+                level = LevelEnum.TWO_PAIRS.getLevel();
             } else {  //最多重复次数是3, three of a kind
-                level = 3;
+                level = LevelEnum.THREE_OF_A_KIND.getLevel();
             }
         }
         if(numberMap.size() == 5){
             int max = pokers.stream().mapToInt(Poker::getNumber).max().getAsInt();
             int min = pokers.stream().mapToInt(Poker::getNumber).min().getAsInt();
             if(max - min == 4){   // straight
-                level = 4;
+                level = LevelEnum.STRAIGHT.getLevel();
             }
         }
         if(pokers.stream().map(Poker::getType).collect(Collectors.toSet()).size() == 1){  // 同花
             int max = pokers.stream().mapToInt(Poker::getNumber).max().getAsInt();
             int min = pokers.stream().mapToInt(Poker::getNumber).min().getAsInt();
             if(max - min == 4){   // 顺子
-                level = 8;   // straight flush
+                level = LevelEnum.STRAIGHT_FLUSH.getLevel();   // straight flush
             } else {
-                level = 5;    //flush
+                level = LevelEnum.FLUSH.getLevel();    //flush
             }
         }
         if(numberMap.size() == 2) {
             if(valueList.get(0) == 3) {  //最多重复次数是3且另外两张是pair, full house
-                level = 6;
+                level = LevelEnum.FULL_HOUSE.getLevel();
             } else {
-                level = 7;  //最多重复次数是4, four of a kind
+                level = LevelEnum.FOUR_OF_A_KIND.getLevel();  //最多重复次数是4, four of a kind
             }
         }
         return level;

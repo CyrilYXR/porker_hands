@@ -22,8 +22,8 @@ public class PokerGame {
         int level1 = pokerHands1.getLevel();
         int level2 = pokerHands2.getLevel();
 
-        System.out.println("level1="+level1);
-        System.out.println("level2="+level2);
+//        System.out.println("level1="+level1);
+//        System.out.println("level2="+level2);
 
         if(level1 == level2){
 
