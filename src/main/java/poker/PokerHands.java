@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PokerHands {
 
@@ -19,16 +18,13 @@ public class PokerHands {
         computeLevel();
     }
 
-    public int getMaxPokerNumber(){
+    public int getMaxPokerNumberInNoRepeatCards(){
 
         List<Poker> filterPokers = pokers.stream().filter(poker -> numberMap.get(poker.getNumber()) == 1).collect(Collectors.toList());
 
-        // when level is 6, all pokers are repeated
-        // 应该返回出现次数最多的数字，以便比较两者都是full house的情况
-        if(filterPokers.size() == 0) {
-            Integer max = numberMap.keySet().stream().mapToInt(numberMap::get).max().getAsInt();
-//            System.out.println(max);
-            filterPokers = pokers.stream().filter(poker -> numberMap.get(poker.getNumber()).equals(max)).collect(Collectors.toList());
+        //如果两者都是full house的情况，则直接返回-1
+        if(filterPokers.size() == 0){
+            return -1;
         }
         return filterPokers.stream()
                 .mapToInt(Poker::getNumber)

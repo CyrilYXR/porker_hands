@@ -1,10 +1,7 @@
 package poker;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class PokerGame {
@@ -31,12 +28,14 @@ public class PokerGame {
                 return EQUAL;
             }
 
-            int maxPokerNumber1 = pokerHands1.getMaxPokerNumber();
-            int maxPokerNumber2 = pokerHands2.getMaxPokerNumber();
+            int maxPokerNumber1 = pokerHands1.getMaxPokerNumberInNoRepeatCards();
+            int maxPokerNumber2 = pokerHands2.getMaxPokerNumberInNoRepeatCards();
             Map<Integer, Integer> numberMap1 = pokerHands1.getNumberMap();
             Map<Integer, Integer> numberMap2 = pokerHands2.getNumberMap();
 
-            if(level1 == 0 || level1 == 4 || level1 == 5) {
+            if(level1 == LevelEnum.HIGH_CARD.getLevel()
+                    || level1 == LevelEnum.STRAIGHT.getLevel()
+                    || level1 == LevelEnum.FLUSH.getLevel()) {
                 return maxPokerNumber1 > maxPokerNumber2 ? FIRST : SECOND;
             }
 
@@ -48,6 +47,7 @@ public class PokerGame {
             if(pairSum1.equals(pairSum2)){
                 return maxPokerNumber1 > maxPokerNumber2 ? FIRST : SECOND;
             }
+            // 如果两副牌都是full house的情况，对子相加肯定不相等，由此可比较大小
             return pairSum1 > pairSum2 ? FIRST : SECOND;
         }
 
