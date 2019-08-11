@@ -1,27 +1,49 @@
 package poker;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class PokerHands {
 
+    private List<Poker> pokers;
+    private int level;
 
-    public static String compete(List<Poker> first, List<Poker> second) {
+    public PokerHands(List<Poker> pokers) {
+        this.pokers = pokers;
+    }
 
-        List<Integer> collectFirst = first.stream().map(Poker::getNumber).collect(Collectors.toList());
-        List<Integer> collectSecond = second.stream().map(Poker::getNumber).collect(Collectors.toList());
-        if(collectFirst.toString().equals(collectSecond.toString())){
-            return "equal";
+    public int getMaxPokerNumber(){
+        return pokers.stream().mapToInt(Poker::getNumber).max().getAsInt();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(this == obj) return true;
+        if(getClass() != obj.getClass()) return false;
+        PokerHands pokerHands = (PokerHands) obj;
+        List<Integer> thisPokers = this.pokers.stream().map(Poker::getNumber).collect(Collectors.toList());
+        List<Integer> objPokers = pokerHands.pokers.stream().map(Poker::getNumber).collect(Collectors.toList());
+        if(thisPokers.toString().equals(objPokers.toString())){
+            return true;
         }
+        return false;
+    }
 
-        Integer maxOfFirst = first.stream().mapToInt(Poker::getNumber).max().getAsInt();
-        Integer maxOfSecond = second.stream().mapToInt(Poker::getNumber).max().getAsInt();
-        if(maxOfFirst > maxOfSecond){
-            return "first";
-        }
-        return "second";
+    public List<Poker> getPokers() {
+        return pokers;
+    }
+
+    public void setPokers(List<Poker> pokers) {
+        this.pokers = pokers;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }
