@@ -63,8 +63,14 @@ public class PokerHands {
                 level = 4;
             }
         }
-        if(pokers.stream().map(Poker::getType).collect(Collectors.toSet()).size() == 1){
-            level = 5;    //flush
+        if(pokers.stream().map(Poker::getType).collect(Collectors.toSet()).size() == 1){  // 同花
+            int max = pokers.stream().mapToInt(Poker::getNumber).max().getAsInt();
+            int min = pokers.stream().mapToInt(Poker::getNumber).min().getAsInt();
+            if(max - min == 4){   // 顺子
+                level = 8;   // straight flush
+            } else {
+                level = 5;    //flush
+            }
         }
         if(numberMap.size() == 2) {
             if(valueList.get(0) == 3) {  //最多重复次数是3且另外两张是pair, full house
