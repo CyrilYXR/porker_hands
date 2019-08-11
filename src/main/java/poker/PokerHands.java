@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PokerHands {
 
@@ -54,6 +55,9 @@ public class PokerHands {
         }
         if(pokers.stream().map(Poker::getType).collect(Collectors.toSet()).size() == 1){
             level = 5;    //flush
+        }
+        if(numberMap.size() == 2) {   // full house
+            level = 6;
         }
         return level;
     }
