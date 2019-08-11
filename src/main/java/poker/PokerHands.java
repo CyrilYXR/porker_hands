@@ -35,7 +35,6 @@ public class PokerHands {
         List<Integer> valueList = numberMap.values().stream()
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
-//        System.out.println(valueList);
         if(numberMap.size() == 4){  // one pair
             level = 1;
         }
@@ -52,6 +51,9 @@ public class PokerHands {
             if(max - min == 4){   // straight
                 level = 4;
             }
+        }
+        if(pokers.stream().map(Poker::getType).collect(Collectors.toSet()).size() == 1){
+            level = 5;    //flush
         }
         return level;
     }

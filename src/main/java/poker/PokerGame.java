@@ -29,6 +29,8 @@ public class PokerGame {
         Map<Integer, Integer> numberMap1 = pokerHands1.getNumberMap();
         Map<Integer, Integer> numberMap2 = pokerHands2.getNumberMap();
 
+        System.out.println("level1="+level1);
+        System.out.println("level2="+level2);
         if(level1 == level2){
             if(level1 == 0 || level1 == 4) {
                 return maxPokerNumber1 > maxPokerNumber2 ? FIRST : SECOND;
