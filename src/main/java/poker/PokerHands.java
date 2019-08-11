@@ -20,7 +20,17 @@ public class PokerHands {
     }
 
     public int getMaxPokerNumber(){
-        return pokers.stream().filter(poker -> numberMap.get(poker.getNumber())==1)
+
+        List<Poker> filterPokers = pokers.stream().filter(poker -> numberMap.get(poker.getNumber()) == 1).collect(Collectors.toList());
+
+        // when level is 6, all pokers are repeated
+        // 应该返回出现次数最多的数字，以便比较两者都是full house的情况
+        if(filterPokers.size() == 0) {
+            Integer max = numberMap.keySet().stream().mapToInt(numberMap::get).max().getAsInt();
+            System.out.println(max);
+            filterPokers = pokers.stream().filter(poker -> numberMap.get(poker.getNumber()).equals(max)).collect(Collectors.toList());
+        }
+        return filterPokers.stream()
                 .mapToInt(Poker::getNumber)
                 .max().getAsInt();
     }

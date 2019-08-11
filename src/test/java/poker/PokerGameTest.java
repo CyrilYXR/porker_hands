@@ -141,4 +141,15 @@ public class PokerGameTest {
         Assert.assertEquals("first", result);
 
     }
+
+    @Test
+    public void should_return_second_win_when_both_has_a_full_house_but_second_is_bigger(){
+
+        List<Poker> first = Arrays.asList(new Poker("3H"),new Poker("3H"),new Poker("4H"),new Poker("4H"),new Poker("4H"));
+        List<Poker> second = Arrays.asList(new Poker("7C"),new Poker("7C"), new Poker("9S"), new Poker("9H"), new Poker("9C"));
+
+        String result = PokerGame.compete(first, second);
+        Assert.assertEquals("second", result);
+
+    }
 }
