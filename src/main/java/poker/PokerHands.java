@@ -1,5 +1,6 @@
 package poker;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,11 +32,19 @@ public class PokerHands {
         for(Poker poker : pokers){
             numberMap.merge(poker.getNumber(), 1, (a, b) -> a + b);
         }
-        if(numberMap.size() == 4){
+        List<Integer> valueList = numberMap.values().stream()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+//        System.out.println(valueList);
+        if(numberMap.size() == 4){  // one pair
             level = 1;
         }
         if(numberMap.size() == 3){
-            level = 2;
+            if(valueList.get(0) == 2){  // two pairs
+                level = 2;
+            } else {  //three of a kind
+                level = 3;
+            }
         }
         return level;
     }

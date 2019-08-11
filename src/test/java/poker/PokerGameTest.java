@@ -73,4 +73,15 @@ public class PokerGameTest {
         Assert.assertEquals("first", result);
 
     }
+
+    @Test
+    public void should_return_second_win_when_second_has_three_of_a_kind(){
+
+        List<Poker> first = Arrays.asList(new Poker("3C"),new Poker("3D"),new Poker("5H"),new Poker("5S"),new Poker("AC"));
+        List<Poker> second = Arrays.asList(new Poker("4C"),new Poker("4D"), new Poker("4S"), new Poker("KS"), new Poker("8C"));
+
+        String result = PokerGame.compete(first, second);
+        Assert.assertEquals("second", result);
+
+    }
 }
