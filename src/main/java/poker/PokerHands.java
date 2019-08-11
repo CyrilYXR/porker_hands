@@ -1,6 +1,5 @@
 package poker;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,24 +10,28 @@ public class PokerHands {
     private List<Poker> pokers;
     private int level = 0;
 
-    private Map<Integer, Integer> map = new HashMap<>();
+    private Map<Integer, Integer> numberMap = new HashMap<>();
 
     public PokerHands(List<Poker> pokers) {
         this.pokers = pokers;
+        computeLevel();
     }
 
     public int getMaxPokerNumber(){
-        return pokers.stream().filter(poker -> map.get(poker.getNumber())==1)
+        return pokers.stream().filter(poker -> numberMap.get(poker.getNumber())==1)
                 .mapToInt(Poker::getNumber)
                 .max().getAsInt();
     }
 
     public int getLevel() {
-//        Map<Integer, Integer> map = new HashMap<>();
+        return level;
+    }
+
+    public int computeLevel(){
         for(Poker poker : pokers){
-            map.merge(poker.getNumber(), 1, (a, b) -> a + b);
+            numberMap.merge(poker.getNumber(), 1, (a, b) -> a + b);
         }
-        if(map.size() == 4){
+        if(numberMap.size() == 4){
             level = 1;
         }
         return level;
@@ -58,5 +61,13 @@ public class PokerHands {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public Map<Integer, Integer> getNumberMap() {
+        return numberMap;
+    }
+
+    public void setNumberMap(Map<Integer, Integer> numberMap) {
+        this.numberMap = numberMap;
     }
 }
