@@ -18,9 +18,6 @@ public class PokerGame {
 
         PokerHands pokerHands1 = new PokerHands(first);
         PokerHands pokerHands2 = new PokerHands(second);
-        if(pokerHands1.equals(pokerHands2)){
-            return EQUAL;
-        }
 
         int level1 = pokerHands1.getLevel();
         int level2 = pokerHands2.getLevel();
@@ -29,6 +26,10 @@ public class PokerGame {
         System.out.println("level2="+level2);
 
         if(level1 == level2){
+
+            if(pokerHands1.equals(pokerHands2)){
+                return EQUAL;
+            }
 
             int maxPokerNumber1 = pokerHands1.getMaxPokerNumber();
             int maxPokerNumber2 = pokerHands2.getMaxPokerNumber();
@@ -49,6 +50,7 @@ public class PokerGame {
             }
             return pairSum1 > pairSum2 ? FIRST : SECOND;
         }
+
         return level1 > level2 ? FIRST : SECOND;
     }
 }

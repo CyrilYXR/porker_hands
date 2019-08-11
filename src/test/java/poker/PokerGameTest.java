@@ -174,4 +174,15 @@ public class PokerGameTest {
         Assert.assertEquals("second", result);
 
     }
+
+    @Test
+    public void should_return_first_win_when_their_poker_number_is_equal_but_first_is_straight_flush_and_second_is_straight(){
+
+        List<Poker> first = Arrays.asList(new Poker("2C"),new Poker("3C"),new Poker("4C"),new Poker("5C"),new Poker("6C"));
+        List<Poker> second = Arrays.asList(new Poker("2H"),new Poker("3S"),new Poker("4S"),new Poker("5D"),new Poker("6D"));
+
+        String result = PokerGame.compete(first, second);
+        Assert.assertEquals("first", result);
+
+    }
 }
