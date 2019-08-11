@@ -26,26 +26,24 @@ public class PokerGame {
         int level2 = pokerHands2.getLevel();
         int maxPokerNumber1 = pokerHands1.getMaxPokerNumber();
         int maxPokerNumber2 = pokerHands2.getMaxPokerNumber();
-
         Map<Integer, Integer> numberMap1 = pokerHands1.getNumberMap();
         Map<Integer, Integer> numberMap2 = pokerHands2.getNumberMap();
 
         if(level1 == level2){
-
-            if(level1 == 1) {
-                List<Integer> pairs1 = numberMap1.keySet().stream().filter(key -> numberMap1.get(key) >= 2).collect(Collectors.toList());
-                List<Integer> pairs2 = numberMap2.keySet().stream().filter(key -> numberMap2.get(key) >= 2).collect(Collectors.toList());
-                Integer pairSum1 = pairs1.stream().reduce((x, y) -> x + y).get();
-                Integer pairSum2 = pairs2.stream().reduce((x, y) -> x + y).get();
-                if(pairSum1.equals(pairSum2)){
-                    return maxPokerNumber1 > maxPokerNumber2 ? FIRST : SECOND;
-                }
-                return pairSum1 > pairSum2 ? FIRST : SECOND;
+            if(level1 == 0) {
+                return maxPokerNumber1 > maxPokerNumber2 ? FIRST : SECOND;
             }
 
-            return maxPokerNumber1 > maxPokerNumber2 ? FIRST : SECOND;
-        }
+            List<Integer> pairs1 = numberMap1.keySet().stream().filter(key -> numberMap1.get(key) >= 2).collect(Collectors.toList());
+            List<Integer> pairs2 = numberMap2.keySet().stream().filter(key -> numberMap2.get(key) >= 2).collect(Collectors.toList());
+            Integer pairSum1 = pairs1.stream().reduce((x, y) -> x + y).get();
+            Integer pairSum2 = pairs2.stream().reduce((x, y) -> x + y).get();
 
+            if(pairSum1.equals(pairSum2)){
+                return maxPokerNumber1 > maxPokerNumber2 ? FIRST : SECOND;
+            }
+            return pairSum1 > pairSum2 ? FIRST : SECOND;
+        }
         return level1 > level2 ? FIRST : SECOND;
     }
 }
