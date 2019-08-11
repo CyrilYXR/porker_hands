@@ -32,7 +32,7 @@ public class PokerGame {
         System.out.println("level1="+level1);
         System.out.println("level2="+level2);
         if(level1 == level2){
-            if(level1 == 0 || level1 == 4) {
+            if(level1 == 0 || level1 == 4 || level1 == 5) {
                 return maxPokerNumber1 > maxPokerNumber2 ? FIRST : SECOND;
             }
 
