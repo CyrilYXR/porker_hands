@@ -46,6 +46,13 @@ public class PokerHands {
                 level = 3;
             }
         }
+        if(numberMap.size() == 5){
+            int max = pokers.stream().mapToInt(Poker::getNumber).max().getAsInt();
+            int min = pokers.stream().mapToInt(Poker::getNumber).min().getAsInt();
+            if(max - min == 4){   // straight
+                level = 4;
+            }
+        }
         return level;
     }
 
