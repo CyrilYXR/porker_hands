@@ -1,13 +1,15 @@
 package poker;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class PokerHands {
 
     private List<Poker> pokers;
-    private int level;
+    private int level = 0;
 
     public PokerHands(List<Poker> pokers) {
         this.pokers = pokers;
@@ -15,6 +17,17 @@ public class PokerHands {
 
     public int getMaxPokerNumber(){
         return pokers.stream().mapToInt(Poker::getNumber).max().getAsInt();
+    }
+
+    public int getLevel() {
+        Map<Integer, Integer> map = new HashMap<>();
+        for(Poker poker : pokers){
+            map.merge(poker.getNumber(), 1, (a, b) -> a + b);
+        }
+        if(map.size() == 4){
+            level = 1;
+        }
+        return level;
     }
 
     @Override
@@ -37,10 +50,6 @@ public class PokerHands {
 
     public void setPokers(List<Poker> pokers) {
         this.pokers = pokers;
-    }
-
-    public int getLevel() {
-        return level;
     }
 
     public void setLevel(int level) {

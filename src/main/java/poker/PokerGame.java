@@ -23,7 +23,15 @@ public class PokerGame {
 
         int maxPokerNumber1 = pokerHands1.getMaxPokerNumber();
         int maxPokerNumber2 = pokerHands2.getMaxPokerNumber();
-        if(maxPokerNumber1 > maxPokerNumber2){
+
+        int level1 = pokerHands1.getLevel();
+        int level2 = pokerHands2.getLevel();
+
+        if(level1 == level2){
+            if(maxPokerNumber1 > maxPokerNumber2){
+                return FIRST;
+            }
+        } else if(level1 > level2) {
             return FIRST;
         }
         return SECOND;
